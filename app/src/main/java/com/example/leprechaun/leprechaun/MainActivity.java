@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity
         app.ads_list.add(R.drawable.ad1);
         app.ads_list.add(R.drawable.ad2);
         app.ads_list.add(R.drawable.ad3);
-        app.ads_list.add(R.drawable.chuck);
+        app.ads_list.add(R.drawable.leprechaun);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

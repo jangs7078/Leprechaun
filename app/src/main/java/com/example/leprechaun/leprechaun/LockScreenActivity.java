@@ -26,6 +26,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
+import android.view.ViewPropertyAnimator;
 
 public class LockScreenActivity extends Activity{
     public final static String LOCK_SCREEN_OFF = "com.example.leprechaun.LOCK_SCREEN_OFF";
@@ -40,6 +43,10 @@ public class LockScreenActivity extends Activity{
     //int phone_x,phone_y;
     int home_x,home_y;
     int[] droidpos;
+    private LinearLayout llMotion;
+    private RelativeLayout llContainer;
+    private float default_x = 0;
+    private Boolean moveable = false;
 
     private int _xDelta;
     private int _yDelta;
@@ -67,7 +74,7 @@ public class LockScreenActivity extends Activity{
         setContentView(R.layout.activity_lock_screen);
 
         background_image = (ImageView) findViewById(R.id.background);
-        background_image.setScaleType(ImageView.ScaleType.FIT_XY);
+        //background_image.setScaleType(ImageView.ScaleType.FIT_XY);
         background_image.setImageResource(R.drawable.background);
 
         lock_screen_ad = (ImageView) findViewById(R.id.lock_screen_ad);
@@ -78,13 +85,35 @@ public class LockScreenActivity extends Activity{
 
         LeprechaunApp app = (LeprechaunApp) getApplicationContext();
         lock_screen_ad.setImageResource(app.ads_list.get(random_num));
-        lock_screen_ad.setOnTouchListener(new View.OnTouchListener()
-        {
+
+        llMotion = (LinearLayout) findViewById(R.id.slide_layout);
+        llContainer = (RelativeLayout) findViewById(R.id.slide_container);
+        llContainer.setOnTouchListener(new OnTouchListener() {
+
             @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                onSlideTouch(v, event);
-                return false;
+            public boolean onTouch(View v, MotionEvent event) {
+
+                float x = event.getX();
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    moveable = true;
+                    default_x = x;
+                } else if (action == MotionEvent.ACTION_UP && moveable) {
+                    moveable = false;
+                    x = event.getX();
+                    System.out.println(x);
+                    System.out.println(default_x);
+                    if(x > default_x) {
+                        finish();
+                    }else {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://leprechaun.launchrock.com"));
+                        startActivity(browserIntent);
+                        finish();
+                    }
+                }
+
+                return true;
+
             }
         });
 
@@ -128,47 +157,7 @@ public class LockScreenActivity extends Activity{
         }
     }
 
-    public void onSlideTouch( View view, MotionEvent event )
-    {
-        //When the user pushes down on an ImageView
-        if ( event.getAction() == MotionEvent.ACTION_DOWN )
-        {
-            inDragMode = true; //Set a variable so we know we started draggin the imageView
-            //Set the selected ImageView X and Y exact position
-            selectedImageViewX = Math.abs((int)event.getRawX()-((ImageView)view).getLeft());
-            selectedImageViewY = Math.abs((int)event.getRawY()-((ImageView)view).getTop());
-            //Bring the imageView in front
-            ((ImageView)view).bringToFront();
-        }
 
-        //When the user let's the ImageView go (raises finger)
-        if ( event.getAction() == MotionEvent.ACTION_UP )
-        {
-            inDragMode = false; //Reset the variable which let's us know we're not in drag mode anymore
-        }
-
-        //When the user keeps his finger on te screen and drags it (slides it)
-        if ( event.getAction() == MotionEvent.ACTION_MOVE )
-        {
-            //If we've started draggin the imageView
-            if ( inDragMode )
-            {
-                //Get a parameters object (THIS EXAMPLE IS FOR A RELATIVE LAYOUT)
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)lock_screen_ad.getLayoutParams();
-                //Change the position of the imageview accordingly
-                params.setMargins((int)event.getRawX()-selectedImageViewX, (int)event.getRawY()-selectedImageViewY, 0, 0);
-                //Set the new params
-                lock_screen_ad.setLayoutParams(params);
-
-                //If we hit a limit with our imageView position
-                if( (int)event.getRawX()-selectedImageViewX > 20)
-                {
-                    finish();
-                }
-            }
-        }
-
-    }
 
     class StateListener extends PhoneStateListener{
         @Override
