@@ -5,7 +5,13 @@
     android:padding="8dp" >
 
     <TextView
-        android:id="@+id/ticket"
+        android:id="@+id/store"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/watched_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

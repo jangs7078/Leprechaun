@@ -1,34 +1,30 @@
 package com.example.leprechaun.leprechaun;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.content.Intent;
-import android.view.WindowManager;
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup.MarginLayoutParams;
+import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.app.Activity;
+import android.widget.TextView;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Random;
-import android.view.Window;
-import android.widget.Button;
-import android.net.Uri;
-import android.support.v4.content.LocalBroadcastManager;
-import android.content.IntentFilter;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.view.ViewGroup;
-import android.view.View.OnTouchListener;
-import android.view.ViewPropertyAnimator;
 
 public class LockScreenActivity extends Activity{
     public final static String LOCK_SCREEN_OFF = "com.example.leprechaun.LOCK_SCREEN_OFF";
@@ -73,9 +69,18 @@ public class LockScreenActivity extends Activity{
 
         setContentView(R.layout.activity_lock_screen);
 
+        TextView date_tv = (TextView) findViewById(R.id.date_view);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+        String currentDate = sdf.format(new Date());
+        date_tv.setText(currentDate);
+
         background_image = (ImageView) findViewById(R.id.background);
-        //background_image.setScaleType(ImageView.ScaleType.FIT_XY);
-        background_image.setImageResource(R.drawable.background);
+        background_image.setScaleType(ImageView.ScaleType.FIT_XY);
+        Bitmap bm = ((BitmapDrawable)getResources().getDrawable(R.drawable.background)).getBitmap();
+        int nh = (int) ( bm.getHeight() * (512.0 / bm.getWidth()) );
+        Bitmap scaled = Bitmap.createScaledBitmap(bm, 512, nh, true);
+        background_image.setImageBitmap(scaled);
+
 
         lock_screen_ad = (ImageView) findViewById(R.id.lock_screen_ad);
         lock_screen_ad.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -83,7 +88,7 @@ public class LockScreenActivity extends Activity{
         Random r = new Random();
         int random_num = r.nextInt(4);
 
-        LeprechaunApp app = (LeprechaunApp) getApplicationContext();
+        final LeprechaunApp app = (LeprechaunApp) getApplicationContext();
         lock_screen_ad.setImageResource(app.ads_list.get(random_num));
 
         llMotion = (LinearLayout) findViewById(R.id.slide_layout);
@@ -104,6 +109,7 @@ public class LockScreenActivity extends Activity{
                     System.out.println(x);
                     System.out.println(default_x);
                     if(x > default_x) {
+                        app.ticket_list.add(app.getRandomNumberAsString());
                         finish();
                     }else {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://leprechaun.launchrock.com"));

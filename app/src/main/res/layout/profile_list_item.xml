@@ -5,10 +5,16 @@
     android:padding="8dp" >
 
     <TextView
-        android:id="@+id/ticket"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:textSize="17sp"/>
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/lv_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp" />
 </RelativeLayout>

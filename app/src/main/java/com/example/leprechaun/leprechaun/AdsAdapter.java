@@ -1,9 +1,8 @@
 package com.example.leprechaun.leprechaun;
 
-import android.support.v4.app.FragmentPagerAdapter;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 
 
 /**
@@ -11,6 +10,7 @@ import android.app.Fragment;
  */
 public class AdsAdapter extends FragmentPagerAdapter{
     Context ctxt=null;
+    private int max_num = 100000;
 
     public AdsAdapter(Context ctxt, FragmentManager mgr) {
         super(mgr);
@@ -19,13 +19,11 @@ public class AdsAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return(100000);
+        return(max_num);
     }
 
     @Override
     public SingleAdFragment getItem(int position) {
-        LeprechaunApp app = (LeprechaunApp) ctxt;
-        app.ticket_list.add(app.getRandomNumberAsString());
         return(SingleAdFragment.newInstance(position));
     }
 

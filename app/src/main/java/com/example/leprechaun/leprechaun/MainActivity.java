@@ -1,28 +1,18 @@
 package com.example.leprechaun.leprechaun;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    public final static String PROFILE_DETAIL_TYPE = "com.example.leprechaun.leprechaun.PROFILE_DETAIL_TYPE";
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -44,7 +34,13 @@ public class MainActivity extends ActionBarActivity
         app.ads_list.add(R.drawable.ad1);
         app.ads_list.add(R.drawable.ad2);
         app.ads_list.add(R.drawable.ad3);
-        app.ads_list.add(R.drawable.leprechaun);
+        app.ads_list.add(R.drawable.ad4);
+
+        if(!app.lock_screen_option)
+            this.stopService(new Intent(this, LockScreenService.class));
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xaa24a333));
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

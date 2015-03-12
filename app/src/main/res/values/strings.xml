@@ -18,5 +18,7 @@
     <string name="unlock">unlock</string>
     <string name="detail">detail</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_login">login</string>
+    <string name="title_activity_profile_detail">ProfileDetail</string>
 
 </resources>

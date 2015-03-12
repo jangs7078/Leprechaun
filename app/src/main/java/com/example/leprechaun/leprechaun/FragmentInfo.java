@@ -66,7 +66,7 @@ public class FragmentInfo extends Fragment{
         temp.add("Mook");
         temp.add("47");
         rank.add(temp);
-        Announcement last_week = new Announcement("579221", rank);
+        Announcement last_week = new Announcement("#579221", rank);
         listDataChild.put(listDataHeader.get(0), last_week);
 
         rank = new ArrayList<>();
@@ -82,7 +82,7 @@ public class FragmentInfo extends Fragment{
         temp.add("Mook");
         temp.add("39");
         rank.add(temp);
-        Announcement two_week = new Announcement("528221", rank);
+        Announcement two_week = new Announcement("#528221", rank);
         listDataChild.put(listDataHeader.get(1), two_week);
 
         rank = new ArrayList<>();
@@ -95,10 +95,10 @@ public class FragmentInfo extends Fragment{
         temp.add("22");
         rank.add(temp);
         temp = new ArrayList<>();
-        temp.add("Brain");
+        temp.add("Brian");
         temp.add("17");
         rank.add(temp);
-        Announcement three_week = new Announcement("19221", rank);
+        Announcement three_week = new Announcement("#19221", rank);
         listDataChild.put(listDataHeader.get(2), three_week);
     }
 }

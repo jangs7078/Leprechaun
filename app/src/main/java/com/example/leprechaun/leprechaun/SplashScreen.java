@@ -1,17 +1,14 @@
 package com.example.leprechaun.leprechaun;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import java.util.logging.Handler;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 
 public class SplashScreen extends ActionBarActivity {
 
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 2000;
     private Context context;
 
     @Override
@@ -25,7 +22,7 @@ public class SplashScreen extends ActionBarActivity {
             public void run() {
                 try {
                     sleep(SPLASH_TIME_OUT);
-                    Intent i = new Intent(context, MainActivity.class);
+                    Intent i = new Intent(context, LoginActivity.class);
                     startActivity(i);
                     finish();
 

@@ -1,18 +1,16 @@
 package com.example.leprechaun.leprechaun;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Switch;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
-import android.widget.Toast;
+import android.widget.Switch;
+import android.widget.TextView;
 
 /**
  * Created by kisukjang on 1/25/15.

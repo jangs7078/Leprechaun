@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="titlebackgroundcolor">#FFFFFFFF</color>
-    <color name="barbackground">#00b159</color>
+    <color name="nav_drawer_bg_color">#88FFFFFF</color>
+    <color name="lv_border_color">#22222222</color>
+    <color name="logout_btn">#BBFF0000</color>
+    <color name="login_bg_color">#33222222</color>
 
 </resources>

@@ -34,7 +34,7 @@
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rank"
+        android:text="Rank (# Ads Watched)"
         android:textSize="17dip"
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
